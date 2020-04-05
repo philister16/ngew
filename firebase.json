@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "ngew",
+      "public": "dist/ngew",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

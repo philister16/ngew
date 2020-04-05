@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ngew": {
+      "hosting": {
+        "ngew": [
+          "ngew"
+        ]
+      }
+    }
+  }
+}
