@@ -1,0 +1,29 @@
+.card {
+  width: 100%;
+  max-width: 360px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.logo {
+  height: 120px;
+}
+
+mat-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.action-box {
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.redirect {
+  text-align: center;
+}

@@ -1,0 +1,39 @@
+<mat-toolbar color="primary" class="mat-elevation-z2">
+  <div class="topnav d-flex justify-content-between align-items-center">
+    <div class="left">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <a routerLink="/">
+        <img class="logo" [class.logo-sm]="isHandset$ | async" src="assets/ngew.svg" alt="Ngew Logo" />
+      </a>
+    </div>
+    <div class="right">
+      <a mat-icon-button routerLink="/user">
+        <mat-icon aria-label="User settings icon">account_circle</mat-icon>
+      </a>
+      <button mat-icon-button (click)="auth.logout()">
+        <mat-icon aria-label="Logout button icon">logout</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- main content area -->
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <!-- end -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

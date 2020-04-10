@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-content>
+        <h3 class="m-0"><strong>Email</strong></h3>
+        <div class="py-3">
+            <mat-divider></mat-divider>
+        </div>
+        <app-alert *ngIf="!emailVerified" type="warning" actionTitle="Resend" (action)="resendEmailVerification()">Email
+            not
+            verified. Click the link in your inbox.</app-alert>
+        <form [formGroup]="emailForm" (ngSubmit)="onSave()">
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="standard" class="d-block">
+                        <mat-label>Email</mat-label>
+                        <input readonly matInput type="email" placeholder="Email" formControlName="email">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="!hasNewEmailField" class="col-md-6 justify-content-end align-items-center d-md-flex">
+                    <div class="mt-md-3 ml-1">
+                        <button mat-stroked-button color="secondary" (click)="hasNewEmailField = true">Change
+                            email</button>
+                    </div>
+                </div>
+                <div *ngIf="hasNewEmailField" class="col-md-6 d-flex">
+                    <mat-form-field appearance="standard" class="flex-grow-1">
+                        <mat-label>New email</mat-label>
+                        <input matInput type="email" placeholder="New email" formControlName="newEmail">
+                        <mat-error>Please enter a valid email address.</mat-error>
+                    </mat-form-field>
+                    <div class="ml-2">
+                        <button mat-flat-button color="primary" type="submit" class="mt-3">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

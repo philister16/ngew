@@ -1,0 +1,18 @@
+<div class="alert-box" [ngClass]="{ 
+    'error': type === 'warning', 
+    'success': type === 'success',
+    'info': type === 'info'
+}">
+    <span>
+        <mat-icon aria-hidden="false" aria-label="icon">{{ type === 'success' ? 'check_circle' : type }}
+        </mat-icon>
+    </span>
+    <span class="message">
+        <ng-content></ng-content>
+    </span>
+    <span *ngIf="actionTitle">
+        <button mat-flat-button color="secondary" type="button" (click)="onAction()">
+            {{ actionTitle }}
+        </button>
+    </span>
+</div>

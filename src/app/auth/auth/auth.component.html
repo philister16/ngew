@@ -1,0 +1,65 @@
+<div class="wrapper d-flex justify-content-center align-items-center h-100 bg-light">
+  <div class="card">
+    <mat-card>
+      <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+      <mat-card-content>
+        <div class="logo d-flex justify-content-center align-items-center">
+          <a routerLink="/">
+            <img src="assets/ngew.svg" alt="Logo" width="48" />
+          </a>
+        </div>
+        <mat-card-title>
+          <ng-container *ngTemplateOutlet="title"></ng-container>
+        </mat-card-title>
+        <form *ngIf="mode !== Mode.ACTION; else action" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="py-3">
+          <mat-form-field *ngIf="mode === Mode.SIGNUP">
+            <input ngModel matInput name="firstname" type="text" placeholder="Firstname" />
+          </mat-form-field>
+          <mat-form-field *ngIf="mode === Mode.SIGNUP">
+            <input ngModel matInput name="lastname" type="text" placeholder="Lastname" />
+          </mat-form-field>
+          <mat-form-field *ngIf="mode !== Mode.RESET">
+            <input ngModel email required matInput name="email" type="email" placeholder="Email" />
+            <mat-error>Please provide a valid email address.</mat-error>
+          </mat-form-field>
+          <mat-form-field *ngIf="mode !== Mode.FORGOT">
+            <input #password ngModel required minlength="8" matInput name="password" type="password"
+              placeholder="Password" />
+            <mat-hint align="end">{{ password.value?.length || 0 }}/8</mat-hint>
+            <mat-error>Please provide a password of at least 8 characters.</mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" class="mt-3" type="submit">
+            <ng-container *ngTemplateOutlet="buttonText"></ng-container>
+          </button>
+        </form>
+      </mat-card-content>
+      <mat-card-actions *ngIf="mode !== Mode.ACTION">
+        <a *ngIf="mode !== Mode.LOGIN" routerLink="../login" mat-button>Login</a>
+        <a *ngIf="mode !== Mode.SIGNUP" routerLink="../signup" mat-button>Signup</a>
+        <a *ngIf="mode !== Mode.FORGOT && mode !== Mode.RESET" routerLink="../forgot" mat-button>Forgot password</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #title>
+  <span *ngIf="mode === Mode.LOGIN">Login</span>
+  <span *ngIf="mode === Mode.SIGNUP">Sign up</span>
+  <span *ngIf="mode === Mode.FORGOT">Forgot password</span>
+  <span *ngIf="mode === Mode.RESET">Reset password</span>
+</ng-template>
+
+<ng-template #buttonText>
+  <span *ngIf="mode === Mode.LOGIN">Login</span>
+  <span *ngIf="mode === Mode.SIGNUP">Sign up</span>
+  <span *ngIf="mode === Mode.FORGOT">Request reset</span>
+  <span *ngIf="mode === Mode.RESET">Reset</span>
+</ng-template>
+
+<ng-template #action>
+  <div class="action-box">
+    <span *ngIf="isLoading">Verifying&hellip;</span>
+    <app-alert [type]="alertType">{{ alertMessage }}</app-alert>
+  </div>
+  <div *ngIf="navCountdown" class="redirect">Redirecting in {{ navCountdown }}&hellip;</div>
+</ng-template>
