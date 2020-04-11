@@ -1,0 +1,13 @@
+<mat-toolbar>
+    <h1>Home</h1>
+</mat-toolbar>
+<div class="container py-3">
+    <h2>Launch an alert</h2>
+    <button mat-stroked-button color="primary" (click)="launch()">{{ hasAlert ? 'Hide' : 'Launch' }}</button>
+    <div class="py-3">
+        <app-alert [show]="hasAlert" [dismissible]="true" type="success" (dismissed)="hasAlert = false">
+            Hello there! You've launched an alert. You can
+            click it to dismiss.
+        </app-alert>
+    </div>
+</div>

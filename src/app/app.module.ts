@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent],

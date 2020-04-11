@@ -5,7 +5,8 @@
         <div class="py-3">
             <mat-divider></mat-divider>
         </div>
-        <app-alert *ngIf="!emailVerified" type="warning" actionTitle="Resend" (action)="resendEmailVerification()">Email
+        <app-alert [show]="!emailVerified" type="warning" actionTitle="Resend" (action)="resendEmailVerification()">
+            Email
             not
             verified. Click the link in your inbox.</app-alert>
         <form [formGroup]="emailForm" (ngSubmit)="onSave()">
