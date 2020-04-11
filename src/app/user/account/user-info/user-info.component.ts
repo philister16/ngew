@@ -1,22 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserInfos } from '../../user.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { tap, take } from 'rxjs/operators';
+import { tap, takeUntil } from 'rxjs/operators';
 import { UserService } from '../../user.service';
 import { FlashService } from 'src/app/core/services/flash.service';
+import { BaseComponent } from 'src/app/shared/components/base-component/base-component.component';
 
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit {
+export class UserInfoComponent extends BaseComponent implements OnInit {
   @Input() userInfos: UserInfos = {};
   userInfosForm: FormGroup;
   isDirty = false;
   isLoading = false;
 
-  constructor(private fb: FormBuilder, private user: UserService, private flash: FlashService) { }
+  constructor(private fb: FormBuilder, private user: UserService, private flash: FlashService) {
+    super();
+  }
 
   ngOnInit() {
     this.userInfosForm = this.fb.group({
@@ -33,7 +36,7 @@ export class UserInfoComponent implements OnInit {
 
     this.userInfosForm.valueChanges.pipe(
       tap(val => this.isDirty = true),
-      take(1)
+      takeUntil(this.destroyed$)
     ).subscribe();
 
   }

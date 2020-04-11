@@ -122,6 +122,17 @@ export class AuthService {
     }
   }
 
+  async updatePassword(oldPassword: string, newPassword: string) {
+    try {
+      const { email } = await this.user.currentUserSnapshot;
+      const cred = await this.authenticate(email, oldPassword);
+      await cred.user.updatePassword(newPassword);
+    } catch (err) {
+      this.flashError(err.message);
+      throw err;
+    }
+  }
+
   async resendEmailVerificationCode() {
     try {
       this.afAuth.useDeviceLanguage();

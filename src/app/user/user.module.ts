@@ -17,9 +17,10 @@ import { UserEmailComponent } from './account/user-email/user-email.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { UserPasswordComponent } from './account/user-password/user-password.component';
 
 @NgModule({
-  declarations: [AccountComponent, UserInfoComponent, UserEmailComponent],
+  declarations: [AccountComponent, UserInfoComponent, UserEmailComponent, UserPasswordComponent],
   imports: [
     CommonModule,
     SharedModule,
