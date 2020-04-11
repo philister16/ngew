@@ -2,23 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBUtq53yGfnphSgwXhWBhkVHKRoGSMdax8",
-  authDomain: "ngew-a2ba9.firebaseapp.com",
-  databaseURL: "https://ngew-a2ba9.firebaseio.com",
-  projectId: "ngew-a2ba9",
-  storageBucket: "ngew-a2ba9.appspot.com",
-  messagingSenderId: "59627387483",
-  appId: "1:59627387483:web:d101d473533c2186c75d7e",
-  measurementId: "G-JR7HCNEGHT",
-};
+import { firebaseConfig } from '../private';
 
 export const environment = {
   production: false,
   firebaseConfig,
-  afterLoginPath: "/",
-  afterSignupPath: "/",
-  afterLogoutPath: "/auth/login",
+  afterLoginPath: '/',
+  afterSignupPath: '/',
+  afterLogoutPath: '/auth/login',
 };
 
 /*
