@@ -41,6 +41,7 @@ export class AuthComponent extends BaseComponent implements OnInit {
         takeUntil(this.destroyed$),
         tap((val) => {
           this.mode = val.mode;
+          this.alertMessage = undefined;
           if (this.mode === Mode.ACTION) {
             const { mode, oobCode } = this.route.snapshot.queryParams;
             this.handleAction(mode, oobCode);
@@ -61,6 +62,15 @@ export class AuthComponent extends BaseComponent implements OnInit {
         await this.auth.signup(authForm.value);
       } else if (this.mode === Mode.LOGIN) {
         await this.auth.login(authForm.value);
+      } else if (this.mode === Mode.FORGOT) {
+        await this.auth.requestPasswordReset(authForm.value.email);
+        this.setAlert('success', `Click the reset link sent to ${authForm.value.email} to set a new password.`);
+      } else if (this.mode === Mode.RESET) {
+        const { oobCode } = this.route.snapshot.queryParams;
+        const { password } = authForm.value;
+        await this.auth.resetPassword(oobCode, password);
+        this.setAlert('success', 'Reset successful. Use new password to login.');
+        this.navigateAfterCountdown(5, '/auth/login');
       }
     } catch (err) { } finally { this.isLoading = false; }
   }
@@ -78,6 +88,13 @@ export class AuthComponent extends BaseComponent implements OnInit {
         await this.auth.verifyEmail(actionCode);
         this.setAlert('success', 'Email verified successfully.');
         this.navigateAfterCountdown(5, '/');
+      } else if (actionMode === 'recoverEmail') {
+        await this.auth.recoverEmail(actionCode);
+        this.setAlert('success', 'Your previous email was restored. Change your password if you think your account was compromised.');
+        this.navigateAfterCountdown(5, '/auth');
+      } else if (actionMode === 'resetPassword') {
+        await this.auth.verifyPasswordResetCode(actionCode);
+        this.router.navigate(['..', 'reset'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
       }
     } catch (err) {
       this.setAlert('warning', err.message);

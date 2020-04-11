@@ -65,7 +65,7 @@ export class AuthService {
         email,
         password
       );
-      await this.user.get(cred.user.uid).toPromise();
+      // await this.user.get(cred.user.uid).toPromise();
       const path = this.redirectPath
         ? this.redirectPath
         : environment.afterLoginPath;
@@ -100,6 +100,28 @@ export class AuthService {
     }
   }
 
+  async requestPasswordReset(email: string) {
+    try {
+      await this.afAuth.sendPasswordResetEmail(email);
+    } catch (err) {
+      this.flashError(err.message);
+      throw err;
+    }
+  }
+
+  async verifyPasswordResetCode(code: string) {
+    return this.afAuth.verifyPasswordResetCode(code);
+  }
+
+  async resetPassword(code: string, newPassword: string) {
+    try {
+      await this.afAuth.confirmPasswordReset(code, newPassword);
+    } catch (err) {
+      this.flashError(err.message);
+      throw err;
+    }
+  }
+
   async resendEmailVerificationCode() {
     try {
       this.afAuth.useDeviceLanguage();
@@ -113,8 +135,6 @@ export class AuthService {
   async verifyEmail(code: string) {
     try {
       await this.afAuth.applyActionCode(code);
-      // we have to wait for the user to be present before we can update it
-      // await this.user.currentUserSnapshot; --> now handled in service's update()
       await this.user.update({ emailVerified: true });
     } catch (err) {
       throw err;
@@ -129,6 +149,18 @@ export class AuthService {
       this.afAuth.useDeviceLanguage();
       await afAuthUser.sendEmailVerification();
       await this.user.update({ email: newEmail, emailVerified: false });
+    } catch (err) {
+      this.flashError(err.message);
+      throw err;
+    }
+  }
+
+  async recoverEmail(code: string) {
+    try {
+      const info = await this.afAuth.checkActionCode(code);
+      const { email } = info.data;
+      await this.afAuth.applyActionCode(code);
+      await this.user.update({ email, emailVerified: false });
     } catch (err) {
       this.flashError(err.message);
       throw err;

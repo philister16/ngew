@@ -11,7 +11,8 @@
         <mat-card-title>
           <ng-container *ngTemplateOutlet="title"></ng-container>
         </mat-card-title>
-        <form *ngIf="mode !== Mode.ACTION; else action" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="py-3">
+        <form *ngIf="mode !== Mode.ACTION && !alertMessage; else action" #authForm="ngForm"
+          (ngSubmit)="onSubmit(authForm)" class="py-3">
           <mat-form-field *ngIf="mode === Mode.SIGNUP">
             <input ngModel matInput name="firstname" type="text" placeholder="Firstname" />
           </mat-form-field>
