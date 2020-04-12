@@ -1,32 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { animate, trigger, transition, style } from '@angular/animations';
+import { highlightInOut } from 'src/styles/animations';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
-  animations: [
-    trigger(
-      'inOutAnimation',
-      [
-        transition(
-          ':enter',
-          [
-            style({ opacity: 0, transform: 'translateY(8px)' }),
-            animate('0.2s ease-out',
-              style({ opacity: 1, transform: 'translateY(0px)' }))
-          ]
-        ),
-        transition(
-          ':leave', [
-          style({ opacity: 1 }),
-          animate('0.2s ease-in',
-            style({ opacity: 0, transform: 'translateY(-16px)' }))
-        ]
-        )
-      ]
-    )
-  ]
+  animations: [highlightInOut]
 })
 export class AlertComponent {
   @Input() type: 'success' | 'warning' | 'info';

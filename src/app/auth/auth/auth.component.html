@@ -1,7 +1,7 @@
 <div class="wrapper d-flex justify-content-center align-items-center h-100 bg-light">
   <div class="card">
     <mat-card>
-      <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+      <app-card-loading-bar [show]="isLoading"></app-card-loading-bar>
       <mat-card-content>
         <div class="logo d-flex justify-content-center align-items-center">
           <a routerLink="/">

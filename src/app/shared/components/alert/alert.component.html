@@ -1,4 +1,4 @@
-<div *ngIf="show" [@inOutAnimation] (click)="dismiss()">
+<div *ngIf="show" [@highlightInOut] (click)="dismiss()">
     <div class="alert-box" [ngClass]="{ 
         'error': type === 'warning', 
         'success': type === 'success',

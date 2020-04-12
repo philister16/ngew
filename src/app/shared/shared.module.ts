@@ -11,12 +11,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CardLoadingBarComponent } from './components/card-loading-bar/card-loading-bar.component';
 
 const declarations = [
   BaseComponent,
   LoadingIndicatorComponent,
   AlertComponent,
-  DialogInputComponent
+  DialogInputComponent,
+  CardLoadingBarComponent
 ];
 
 @NgModule({

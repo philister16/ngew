@@ -1,5 +1,5 @@
 <mat-card class="mb-3">
-    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <app-card-loading-bar [show]="isLoading"></app-card-loading-bar>
     <mat-card-content>
         <form [formGroup]="userInfosForm">
             <div class="section-title d-flex justify-content-between align-items-center">

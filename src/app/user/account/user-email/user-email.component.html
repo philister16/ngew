@@ -1,5 +1,5 @@
 <mat-card class="mb-3">
-    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <app-card-loading-bar [show]="isLoading"></app-card-loading-bar>
     <mat-card-content>
         <h3 class="m-0"><strong>Email</strong></h3>
         <div class="py-3">
