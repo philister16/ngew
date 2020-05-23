@@ -6,6 +6,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AlertComponent } from './components/alert/alert.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CardLoadingBarComponent } from './components/card-loading-bar/card-loading-bar.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const declarations = [
   BaseComponent,
@@ -19,6 +20,7 @@ const declarations = [
   imports: [
     CommonModule,
     MatProgressBarModule,
+    MatButtonModule,
     MatIconModule
   ],
   exports: declarations
