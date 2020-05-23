@@ -1,20 +1,21 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
   Router,
-} from "@angular/router";
-import { Observable } from "rxjs";
-import { AuthService } from "./auth.service";
-import { tap } from "rxjs/operators";
+} from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -27,7 +28,7 @@ export class AuthGuard implements CanActivate {
       tap((isLoggedIn) => {
         if (!isLoggedIn) {
           this.auth.setRedirect(state.url);
-          this.router.navigateByUrl("/auth/login");
+          this.router.navigateByUrl(environment.loginPath);
         }
       })
     );

@@ -20,10 +20,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserPasswordComponent } from './account/user-password/user-password.component';
 
 @NgModule({
-  declarations: [AccountComponent, UserInfoComponent, UserEmailComponent, UserPasswordComponent],
+  declarations: [
+    AccountComponent,
+    UserInfoComponent,
+    UserEmailComponent,
+    UserPasswordComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -34,7 +40,6 @@ import { UserPasswordComponent } from './account/user-password/user-password.com
     MatDividerModule,
     MatIconModule,
     MatProgressBarModule,
-    ReactiveFormsModule,
     UserRoutingModule,
   ],
 })

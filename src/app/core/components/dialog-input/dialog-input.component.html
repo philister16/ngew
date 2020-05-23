@@ -3,7 +3,7 @@
     <p>{{ data.content }}</p>
     <mat-form-field>
         <mat-label>{{ data.label }}</mat-label>
-        <input matInput [type]="data.inputType" [(ngModel)]="data.value">
+        <input matInput [type]="data.inputType" [value]="data.value" (change)="data.value = $event.target.value">
     </mat-form-field>
 </div>
 <div mat-dialog-actions align="end">

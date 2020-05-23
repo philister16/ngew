@@ -3,7 +3,6 @@ import { Resolve } from '@angular/router';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
-import { tap, skipWhile, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

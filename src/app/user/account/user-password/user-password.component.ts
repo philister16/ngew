@@ -23,6 +23,7 @@ export class UserPasswordComponent implements OnInit {
   }
 
   async onSave() {
+    this.changePasswordForm.markAllAsTouched();
     if (this.changePasswordForm.invalid) {
       return;
     }

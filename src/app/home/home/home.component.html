@@ -10,4 +10,7 @@
             click it to dismiss.
         </app-alert>
     </div>
+    <hr>
+    <h2>Show global loader</h2>
+    <button mat-stroked-button color="primary" (click)="load()">{{ !hasGlobalLoader ? 'Show' : 'Hide' }}</button>
 </div>

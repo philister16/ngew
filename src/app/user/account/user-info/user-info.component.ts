@@ -33,12 +33,10 @@ export class UserInfoComponent extends BaseComponent implements OnInit {
       state: [this.userInfos.state],
       country: [this.userInfos.country]
     });
-
     this.userInfosForm.valueChanges.pipe(
-      tap(val => this.isDirty = true),
+      tap(() => this.isDirty = true),
       takeUntil(this.destroyed$)
     ).subscribe();
-
   }
 
   async onSave() {
@@ -47,10 +45,9 @@ export class UserInfoComponent extends BaseComponent implements OnInit {
       await this.user.update({ userInfos: this.userInfosForm.value });
       this.isDirty = false;
     } catch (err) {
-      this.flash.err('An error happened');
+      this.flash.err(err.message);
     } finally {
       this.isLoading = false;
-
     }
   }
 

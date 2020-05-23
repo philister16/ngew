@@ -14,6 +14,7 @@ export class UserEmailComponent implements OnInit {
   emailForm: FormGroup;
   hasNewEmailField = false;
   isLoading = false;
+  isSending = false;
 
   constructor(private fb: FormBuilder, private auth: AuthService, private dialog: DialogService) { }
 
@@ -25,6 +26,7 @@ export class UserEmailComponent implements OnInit {
   }
 
   async onSave() {
+    this.emailForm.markAllAsTouched();
     if (this.emailForm.invalid) {
       return;
     }
@@ -43,7 +45,9 @@ export class UserEmailComponent implements OnInit {
 
   async resendEmailVerification() {
     try {
+      this.isSending = true;
       await this.auth.resendEmailVerificationCode();
+      this.isSending = false;
     } catch (err) { }
   }
 
